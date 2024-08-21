@@ -1,0 +1,10 @@
+#sentence {
+    display:flex;
+    justify-content: center;
+    padding-top:10%;
+}
+.sentence-letter {
+    background-color: aqua;
+    margin-top: 0px;
+    margin-bottom: -15px;
+}
