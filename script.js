@@ -11,12 +11,23 @@ function init() {
 
 function handleKeyDown(e) {
     console.log(e.keyCode);
+    let key = e.key;
+    e.preventDefault();
     if (e.keyCode == 32) {
         displayKey('Space');
+    } else if (e.keyCode == 220) { // backslash
+        key = encodeURI(e.key)
     } else {
         displayKey(e.key);
     }
-    let letters = document.querySelectorAll(`.${e.key}`);
+    let letters;
+    try {
+        letters = document.querySelectorAll(`.${key}`);
+    } catch (error) {
+        console.log(error);
+        handleMiscKey(e.key);
+        return;
+    }
     letters.forEach(addColor);
     let currentLetterElement = getLetterFromIndex(document.typingPlace);
     if (currentLetterElement.textContent == e.key){
@@ -27,6 +38,35 @@ function handleKeyDown(e) {
             document.typingPlace += 1;
         }
     }
+}
+
+function handleMiscKey(key) {
+    console.log(`Handling misc key: ${key}`);
+    const key_match = {
+        '`': 'backtick',
+        '0': 'zero',
+        '1': 'one',
+        '2': 'two',
+        '3': 'three',
+        '4': 'four',
+        '5': 'five',
+        '6': 'six',
+        '7': 'seven',
+        '8': 'eight',
+        '9': 'nine',
+        ',': 'comma',
+        '.': 'period',
+        '/': 'fslash',
+        '[': 'lbracket',
+        ']': 'rbracket',
+        ']': 'rbracket',
+        '\\': 'bslash',
+        '-': 'minus',
+        '=': 'equals'
+    }
+    key = key_match[key]
+    element = document.querySelector(`#${key}`);
+    element.style.backgroundColor = 'green';
 }
 
 function generateSentence() {
