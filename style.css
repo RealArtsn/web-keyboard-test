@@ -3,12 +3,14 @@ body {
     align-items: center;
     font-family:sans-serif;
     flex-direction:column;
+    padding-top:50px;
 }
 
 #sentence {
     display:flex;
     justify-content: center;
-    padding-top:10%;
+    margin-right:300px;
+    /* padding-top:10%; */
 }
 
 .miscKeys {
@@ -34,10 +36,19 @@ body {
 
 .align-right {
     display:flex;
-    width:1209px;
+    width:1379px;
     flex-direction: column;
 }
 
 .miscKeys.right {
     justify-content: flex-end;
+}
+
+.keyboardKey.blank {
+    border:0px;
+    background-color: transparent;
+}
+
+.keyboardKey.double {
+    width:60px;
 }

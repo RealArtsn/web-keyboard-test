@@ -62,7 +62,9 @@ function handleMiscKey(key) {
         ']': 'rbracket',
         '\\': 'bslash',
         '-': 'minus',
-        '=': 'equals'
+        '=': 'equals',
+        ';': 'semicolon',
+        '\'': 'apostrophe',
     }
     key = key_match[key]
     element = document.querySelector(`#${key}`);
