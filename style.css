@@ -15,6 +15,7 @@ body {
 
 .miscKeys {
     display:flex;
+    align-items: center;
 }
 
 .keyboardKey {
@@ -26,11 +27,12 @@ body {
     display:flex;
     background-color: rgb(255,255,255);
     margin: 5px;
+    font-size: 60px;
+    align-items: center;
 }
 
 .keyboardKey p {
-    font-size:60px;
-    margin-top: -30px;
+    /* margin-top: -80px; */
     margin-left:0px;
 }
 
@@ -51,4 +53,23 @@ body {
 
 .keyboardKey.double {
     width:60px;
+}
+
+.keyboardKey.pressed {
+    transition: 0.1s;
+    /* width:20px;
+    height:20px; */
+    background-color: green;
+    border-width: 1px;
+    font-size: 55px
+}
+
+.keyboardKey.released {
+    transition: 0.1s;
+    /* width:25px;
+    height:25px; */
+    background-color: chartreuse;
+    border-width: inherit;
+    margin:5px;
+    font-size:60px;
 }

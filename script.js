@@ -3,6 +3,7 @@ function init() {
     displayKey('-')
     document.typingPlace = 0;
     document.onkeydown = handleKeyDown;
+    document.onkeyup = handleKeyUp;
     document.querySelector('body').style.backgroundColor = 'rgb(155,155,155)';
     generateSentence();
 
@@ -25,7 +26,7 @@ function handleKeyDown(e) {
         letters = document.querySelectorAll(`.${key}`);
     } catch (error) {
         console.log(error);
-        handleMiscKey(e.key);
+        handleMiscKey(e.key, true);
         return;
     }
     letters.forEach(addColor);
@@ -40,7 +41,11 @@ function handleKeyDown(e) {
     }
 }
 
-function handleMiscKey(key) {
+function handleKeyUp(e) {
+    handleMiscKey(e.key);
+}
+
+function handleMiscKey(key, down) {
     console.log(`Handling misc key: ${key}`);
     const key_match = {
         '`': 'backtick',
@@ -68,7 +73,7 @@ function handleMiscKey(key) {
     }
     key = key_match[key]
     element = document.querySelector(`#${key}`);
-    element.style.backgroundColor = 'green';
+    animateKey(element, down);
 }
 
 function generateSentence() {
@@ -96,6 +101,7 @@ function generateSentence() {
     })
 }
 
+
 function displayKey(key) {
     // Show key on the prominently on the page
     console.log(`Displaying ${key}`);
@@ -122,6 +128,16 @@ function addColor(element) {
     newColor = `rgb(${oldColorArr[0]},${oldColorArr[1] - COLOR_DIFFERENCE},${oldColorArr[2] - COLOR_DIFFERENCE})`
     element.style.backgroundColor = newColor;
     console.log(newColor);
+}
+
+function animateKey(element, down) {
+    element.classList.add(down ? 'pressed' : 'released');
+    element.classList.remove(down ? 'released' : 'pressed');
+}
+
+function releaseKey(element) {
+    element.classList.remove('pressed');
+    element.classList.add('released');
 }
 
 init()
