@@ -1,7 +1,7 @@
 
 function init() {
     displayKey('-')
-    document.typingPlace = 0;
+    // document.typingPlace = 0;
     document.onkeydown = handleKeyDown;
     document.onkeyup = handleKeyUp;
     document.querySelector('body').style.backgroundColor = 'rgb(155,155,155)';
@@ -13,6 +13,7 @@ function init() {
 function handleKeyDown(e) {
     e.preventDefault();
     handleMiscKey(e.key.toUpperCase(), true);
+    handleSentence(e.key)
     // console.log(e.keyCode);
     // let key = e.key;
     // e.preventDefault();
@@ -38,7 +39,7 @@ function handleKeyDown(e) {
     //     document.typingPlace += 1;
     //     // skip space
     //     if (getLetterFromIndex(document.typingPlace).textContent == '\xa0') {
-    //         document.typingPlace += 1;
+    //         document.typingPlace += 1;e.key
     //     }
     // }
 }
@@ -88,6 +89,21 @@ function handleMiscKey(key, down) {
     
     element = document.querySelector(`#${key}`);
     animateKey(element, down);
+}
+
+function handleSentence(key) {
+    if (document.typingPlace == null) {
+        document.typingPlace = 0;
+    }
+    let currentLetterElement = getLetterFromIndex(document.typingPlace);
+    if (currentLetterElement.textContent == key) {
+        currentLetterElement.style.color = 'black';
+        document.typingPlace += 1;
+        // skip space
+        if (getLetterFromIndex(document.typingPlace).textContent == '\xa0') {
+            document.typingPlace += 1;
+        }
+    }
 }
 
 function generateSentence() {
