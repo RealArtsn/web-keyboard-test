@@ -79,7 +79,11 @@ function handleMiscKey(key, down) {
         'TAB': 'tab',
         'ENTER': 'enter',
         'ESCAPE': 'esc',
-        'BACKSPACE': 'backspace'
+        'BACKSPACE': 'backspace',
+        'ARROWUP': 'uparrow',
+        'ARROWDOWN': 'downarrow',
+        'ARROWLEFT': 'leftarrow',
+        'ARROWRIGHT': 'rightarrow'
     }
 
     if (key in key_match) {
