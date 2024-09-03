@@ -11,38 +11,42 @@ function init() {
 
 
 function handleKeyDown(e) {
-    console.log(e.keyCode);
-    let key = e.key;
     e.preventDefault();
-    if (e.keyCode == 32) {
-        displayKey('Space');
-    } else if (e.keyCode == 220) { // backslash
-        key = encodeURI(e.key)
-    } else {
-        displayKey(e.key);
-    }
-    let letters;
-    try {
-        letters = document.querySelectorAll(`.${key}`);
-    } catch (error) {
-        console.log(error);
-        handleMiscKey(e.key, true);
-        return;
-    }
-    letters.forEach(addColor);
-    let currentLetterElement = getLetterFromIndex(document.typingPlace);
-    if (currentLetterElement.textContent == e.key){
-        currentLetterElement.style.color = 'black';
-        document.typingPlace += 1;
-        // skip space
-        if (getLetterFromIndex(document.typingPlace).textContent == '\xa0') {
-            document.typingPlace += 1;
-        }
-    }
+    handleMiscKey(e.key.toUpperCase(), true);
+    // console.log(e.keyCode);
+    // let key = e.key;
+    // e.preventDefault();
+    // if (e.keyCode == 32) {
+    //     displayKey('Space');
+    // } else if (e.keyCode == 220) { // backslash
+    //     key = encodeURI(e.key)
+    // } else {
+    //     displayKey(e.key);
+    // }
+    // let letters;
+    // try {
+    //     letters = document.querySelectorAll(`.${key}`);
+    // } catch (error) {
+    //     console.log(error);
+    //     handleMiscKey(e.key, true);
+    //     return;
+    // }
+    // letters.forEach(addColor);
+    // let currentLetterElement = getLetterFromIndex(document.typingPlace);
+    // if (currentLetterElement.textContent == e.key){
+    //     currentLetterElement.style.color = 'black';
+    //     document.typingPlace += 1;
+    //     // skip space
+    //     if (getLetterFromIndex(document.typingPlace).textContent == '\xa0') {
+    //         document.typingPlace += 1;
+    //     }
+    // }
 }
 
 function handleKeyUp(e) {
-    handleMiscKey(e.key);
+    e.preventDefault();
+    handleMiscKey(e.key.toUpperCase(), false);
+    
 }
 
 function handleMiscKey(key, down) {
@@ -70,8 +74,18 @@ function handleMiscKey(key, down) {
         '=': 'equals',
         ';': 'semicolon',
         '\'': 'apostrophe',
+        'CAPSLOCK' : 'caps',
+        'TAB': 'tab',
+        'ENTER': 'enter',
+        'ESCAPE': 'esc',
+        'BACKSPACE': 'backspace'
     }
-    key = key_match[key]
+
+    if (key in key_match) {
+        key = key_match[key];
+    }
+    
+    
     element = document.querySelector(`#${key}`);
     animateKey(element, down);
 }

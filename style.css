@@ -69,7 +69,11 @@ body {
     /* width:25px;
     height:25px; */
     background-color: chartreuse;
-    border-width: inherit;
+    border-width: 4px;
     margin:5px;
     font-size:60px;
+}
+
+.keyboardKey.half-height {
+    height:5px;
 }
